@@ -13,6 +13,14 @@ module.exports = defineConfig({
 			}
 		}
 	},
+	devServer: {
+		proxy: {
+			'/api':{
+				target: 'http://localhost:8000/api',
+				pathRewrite: {'^/api': ''}
+			}
+		}
+	},
 	publicPath: process.env.PUBLIC_URL || '/',
 	outputDir: path.resolve(__dirname, '../public')
 })

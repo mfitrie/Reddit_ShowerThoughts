@@ -63,6 +63,9 @@ const getTenRandomThought = async ()=>{
             tenRandomNumber.push(random);
         }
 
+        tenRandomNumber.sort((a,b)=>{
+           return a-b;
+        })
 
         for(number of tenRandomNumber){
             const data = await Thought.findOne({
@@ -110,6 +113,12 @@ router.get('/getbyindex/:index', async(req, res)=>{
 
     res.status(200).json({
         data
+    });
+});
+
+router.post('/addThought', (req, res)=>{
+    res.status(200).json({
+        data: 'Data added!'
     });
 });
 
