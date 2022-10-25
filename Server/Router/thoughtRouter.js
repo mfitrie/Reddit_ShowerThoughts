@@ -26,7 +26,6 @@ const getDataThoughtByIndex = async (index)=>{
         console.log(error);
     }
 }
-// getDataThoughtByID();
 
 
 const getAllDataThought = async ()=>{
@@ -40,7 +39,7 @@ const getAllDataThought = async ()=>{
         console.log(error);
     }
 }
-// getAllDataThought();
+
 
 
 const countThoughtData = async()=>{
@@ -53,17 +52,53 @@ const countThoughtData = async()=>{
 }
 
 
+const getTenRandomThought = async ()=>{
+    try {
+        const count = await countThoughtData();
+        const tenRandomNumber = [];
+        const tenThought = [];
+
+        while(tenRandomNumber.length != 9){
+            const random = Math.floor(Math.random() * count) + 1;
+            tenRandomNumber.push(random);
+        }
+
+
+        for(number of tenRandomNumber){
+            const data = await Thought.findOne({
+                index: number
+            }, {
+                _id: 0,
+                __v: 0,
+            }) ?? 'No Data'
+
+            tenThought.push(data);
+        }
+
+        return tenThought;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 router.get('/', async (req,res)=>{
     const count = await countThoughtData(); 
     res.status(200).json({
-        count
+        message: `Welcome to ShowerThoughts API :D!! There are ${count} number of data.`,
     });
 });
 
 router.get('/getall', async (req, res)=>{
     const data = await getAllDataThought();
+    res.status(200).json({
+        data
+    });
+});
+
+router.get('/getThoughtRandom', async (req, res)=>{
+    const data = await getTenRandomThought();
     res.status(200).json({
         data
     });

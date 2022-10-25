@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 // const fs = require('fs').promises;
-// const path = require('path');
+const path = require('path');
 
 const thoughtRouter = require('./Router/thoughtRouter');
 
@@ -52,16 +52,6 @@ app.use(morgan('dev'));
 // })();
 
 
-// (async()=>{
-//     try {
-//         await Thought.deleteMany();
-//         console.log('Data has been deleted!');
-//     } catch (error) {
-//         console.log(error);
-//     }
-// })();
-
-
 
 
 app.get('/', (req,res)=>{
@@ -69,6 +59,13 @@ app.get('/', (req,res)=>{
         data: 'No data for this route'
     })
 });
+
+
+// // Send static file
+// app.use(express.static(path.resolve(__dirname, '../public')));
+// app.get('/', (req, res)=>{
+//     res.sendFile(path.resolve(`${__dirname}`, '../public/index.html'));
+// });
 
 app.use('/api', thoughtRouter);
 
