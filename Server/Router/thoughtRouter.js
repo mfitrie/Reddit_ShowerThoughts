@@ -52,13 +52,13 @@ const countThoughtData = async()=>{
 }
 
 
-const getTenRandomThought = async ()=>{
+const getFiveRandomThought = async ()=>{
     try {
         const count = await countThoughtData();
         const tenRandomNumber = [];
         const tenThought = [];
 
-        while(tenRandomNumber.length != 9){
+        while(tenRandomNumber.length != 5){
             const random = Math.floor(Math.random() * count) + 1;
             tenRandomNumber.push(random);
         }
@@ -101,7 +101,7 @@ router.get('/getall', async (req, res)=>{
 });
 
 router.get('/getThoughtRandom', async (req, res)=>{
-    const data = await getTenRandomThought();
+    const data = await getFiveRandomThought();
     res.status(200).json({
         data
     });

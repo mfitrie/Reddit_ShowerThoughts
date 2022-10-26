@@ -9,7 +9,9 @@
                 <ul class="SectionOne__listMenu">
                     <li>
                         <Icon icon="akar-icons:github-fill" class="SectionOne__githubIcon" />
-                        GitHub
+                        <a href="https://github.com/mfitrie/Reddit_ShowerThoughts" target="__blank" class="SectionOne__linkGithub">
+                            GitHub
+                        </a>
                     </li>
                 </ul>
             </b-row>
@@ -20,7 +22,7 @@
                     </div>
                     <p class="SectionOne__mainDescription">A place A place where everyone's deepest must peculiar about humanity can be witnessed firsthand.</p>
                     <div class="SectionOne__btnContainer">
-                        <button class="SectionOne__btnStarted">
+                        <button class="SectionOne__btnStarted" title="Get Started">
                             GET STARTED
                             <Icon icon="akar-icons:chevron-right" class="SectionOne__iconGetStarted"/>
                         </button>
@@ -29,35 +31,69 @@
             </b-row>
         </div> 
         <div class="SectionTwo">
+            <b-row class="SectionTwo__cardContainer">
+                <div v-for="item in thoughts" :key="item.index">
+                    <home-card :description="item.thought"></home-card>
+                </div>
+            </b-row>
+            <b-row class="SectionTwo__btnRefreshContainer">
+                <button class="SectionTwo__btnRefresh" title="Refresh" @click="refreshData">
+                    Refresh
+                    <Icon icon="eva:refresh-outline" class="SectionTwo__iconBtnRefresh" />
+                </button>
+            </b-row>
         </div> 
     </div>
 </template>
 
 <script>
 import {Icon} from '@iconify/vue2';
-// import axios from 'axios';
+import axios from 'axios';
+
+import HomeCard from './HomeCard.vue'
 export default {
     components: {
-        Icon
+        Icon,
+        HomeCard
     },
     data() {
         return {
             thoughts: []
         }
     },
+    methods: {
+        async initData(){
+            try {
+                const requestGet = await axios.get('/api/getThoughtRandom');
+                this.thoughts.push(...requestGet.data.data);
+            } catch (error) {
+                this.thoughts.push('No data');
+                if(error.response.status === 0){
+                    console.log('CORS problem');
+                }
+                if(error.response.status === 404){
+                    console.log('Not found');
+                }
+            }    
+        },
+        async refreshData(){
+            try {
+                const requestGet = await axios.get('/api/getThoughtRandom');
+                this.thoughts = [];
+                this.thoughts.push(...requestGet.data.data);
+            } catch (error) {
+                this.thoughts.push('No data');
+                if(error.response.status === 0){
+                    console.log('CORS problem');
+                }
+                if(error.response.status === 404){
+                    console.log('Not found');
+                }
+            }    
+        },
+    },
     async mounted() {
-        // try {
-        //     const requestGet = await axios.get('/api/getThoughtRandom');
-        //     this.thoughts.push(...requestGet.data.data);
-        // } catch (error) {
-        //     this.thoughts.push('No data');
-        //     if(error.response.status === 0){
-        //         console.log('CORS problem');
-        //     }
-        //     if(error.response.status === 404){
-        //         console.log('Not found');
-        //     }
-        // }
+        await this.initData();
     },
 }
 </script>
@@ -119,6 +155,11 @@ export default {
                     list-style: none;
                     padding: 1rem;
                     cursor: pointer;
+
+                    .SectionOne__linkGithub{
+                        text-decoration: none;
+                        color: var(--reddit-color);
+                    }
 
                     .SectionOne__githubIcon{
                         margin-right: 0.2rem;
@@ -187,7 +228,36 @@ export default {
 
     .SectionTwo{
         height: 100vh;
-        background-color: yellow;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23FF4500' fill-opacity='1' d='M0 256L288 288L576 192L864 160L1152 128L1440 160L1440 320L1152 320L864 320L576 320L288 320L0 320Z'%3E%3C/path%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        &__cardContainer{
+            padding: 4rem 1rem 4rem 1rem;
+            height: 75vh;
+        }
+
+        &__btnRefreshContainer{
+            height: 25vh;
+            // background-color: aqua;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+
+            .SectionTwo__btnRefresh{
+                border: 2px solid var(--reddit-color);
+                font-weight: 600;
+                height: 3rem;
+                width: 11rem;
+                border-radius: 5px;
+                padding: 0.5rem;
+                cursor: pointer;
+                background-color: #fff;
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+            }    
+        }
     }
 
     
