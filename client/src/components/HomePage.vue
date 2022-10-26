@@ -1,53 +1,194 @@
 <template>
     <div>
-        <b-row class="row1">
-            <b-col>
-                <span>Hello row1</span>
-                <div>
-                    {{thoughts}}
-                </div>
-            </b-col>
-        </b-row>
-        <b-row class="row2">
-            <b-col>Hello row2</b-col>
-        </b-row>
+        <div class="SectionOne">
+            <b-row class="SectionOne__header">
+                <span class="SectionOne__title">
+                    <Icon icon="fa6-solid:shower"  class="SectionOne__iconTitle"/>
+                    Reddit ShowerThoughts
+                </span>
+                <ul class="SectionOne__listMenu">
+                    <li>
+                        <Icon icon="akar-icons:github-fill" class="SectionOne__githubIcon" />
+                        GitHub
+                    </li>
+                </ul>
+            </b-row>
+            <b-row class="SectionOne__main">
+                <b-col class="SectionOne__mainContainer">
+                    <div class="SectionOne__titleContainer">
+                        <span class="SectionOne__mainTitle">ShowerThoughts</span>
+                    </div>
+                    <p class="SectionOne__mainDescription">A place A place where everyone's deepest must peculiar about humanity can be witnessed firsthand.</p>
+                    <div class="SectionOne__btnContainer">
+                        <button class="SectionOne__btnStarted">
+                            GET STARTED
+                            <Icon icon="akar-icons:chevron-right" class="SectionOne__iconGetStarted"/>
+                        </button>
+                    </div>
+                </b-col>
+            </b-row>
+        </div> 
+        <div class="SectionTwo">
+        </div> 
     </div>
 </template>
 
 <script>
-import axios from 'axios';
+import {Icon} from '@iconify/vue2';
+// import axios from 'axios';
 export default {
+    components: {
+        Icon
+    },
     data() {
         return {
             thoughts: []
         }
     },
     async mounted() {
-        try {
-            const requestGet = await axios.get('/api/getThoughtRandom');
-            this.thoughts.push(...requestGet.data.data);
-        } catch (error) {
-            this.thoughts.push('No data');
-            if(error.response.status === 0){
-                console.log('CORS problem');
-            }
-            if(error.response.status === 404){
-                console.log('Not found');
-            }
-        }
+        // try {
+        //     const requestGet = await axios.get('/api/getThoughtRandom');
+        //     this.thoughts.push(...requestGet.data.data);
+        // } catch (error) {
+        //     this.thoughts.push('No data');
+        //     if(error.response.status === 0){
+        //         console.log('CORS problem');
+        //     }
+        //     if(error.response.status === 404){
+        //         console.log('Not found');
+        //     }
+        // }
     },
 }
 </script>
 
 <style lang="scss">
-    *{
-        font-size: 1rem;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+    :root{
+        --reddit-color: #FF4500;
     }
 
-    .row1{
-        background-color: red;
+    *{
+        font-size: 1rem;
+        font-family: 'Roboto', Arial;
+        margin: 0;
+        padding: 0;
+        color: var(--reddit-color);
     }
-    .row2{
+
+    body{
+        .row{
+            margin-right: 0;
+            margin-left: 0;
+        }
+    }
+
+    .SectionOne{
+        height: 100vh;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23FF4500' fill-opacity='1' d='M0 256L288 288L576 192L864 160L1152 128L1440 160L1440 320L1152 320L864 320L576 320L288 320L0 320Z'%3E%3C/path%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        &__header{
+            height: 10vh;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            font-size: 2rem;
+            justify-content: center;
+            align-content: center;
+            gap: 40rem;
+
+            .SectionOne__title{
+                padding: 1rem;
+                font-size: 1.5rem;
+                font-weight: 600;
+                // background-color: yellow;
+
+                .SectionOne__iconTitle{
+                    width: 2rem;
+                    height: 2rem;
+                }
+            }
+
+            .SectionOne__listMenu{
+                // background-color: aqua;
+                margin-top: auto;
+                margin-bottom: auto;
+
+                li{
+                    list-style: none;
+                    padding: 1rem;
+                    cursor: pointer;
+
+                    .SectionOne__githubIcon{
+                        margin-right: 0.2rem;
+                    }
+                }
+            }
+        }
+
+        &__main{
+            // background-color: orange;
+            height: 90vh;
+            max-height: 90vh;
+
+            .SectionOne__mainContainer{
+                padding: 10rem;
+                display: grid;
+                grid-template-rows: 30% 30% 20%;
+                justify-content: center;
+                align-content: center;
+                text-align: center;
+    
+                .SectionOne__titleContainer{
+                    padding: 1rem;
+                    // background-color: yellow;
+                    
+                    .SectionOne__mainTitle{
+                        font-size: 3rem;
+                        font-weight: 600;
+                        text-shadow: 0px 4px 3px rgba(0,0,0,0.1),
+                                        0px 8px 13px rgba(0,0,0,0.1),
+                                        0px 18px 23px rgba(0,0,0,0.1);
+                    }
+                }
+    
+                .SectionOne__mainDescription{
+                    // background-color: aqua;
+                    font-size: 1.2rem;
+                    width: 70%;
+                    height: 100%;
+                    padding: 1rem;
+                    justify-self: center;
+                }
+                .SectionOne__btnContainer{
+                    // background-color: wheat;
+
+                    .SectionOne__btnStarted{
+                        border: 2px solid var(--reddit-color);
+                        font-weight: 600;
+                        height: 3rem;
+                        width: 11rem;
+                        border-radius: 5px;
+                        padding: 0.5rem;
+                        cursor: pointer;
+                        background-color: #fff;
+                        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+                        .SectionOne__iconGetStarted{
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    .SectionTwo{
+        height: 100vh;
         background-color: yellow;
     }
+
+    
 </style>
