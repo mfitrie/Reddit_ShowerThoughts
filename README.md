@@ -106,8 +106,8 @@ This section should list any major frameworks/libraries used to bootstrap your p
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot-1]: https://github.com/mfitrie/Reddit_ShowerThoughts/tree/feature/ProjectScreenshot/firstpage.png
-[product-screenshot-2]: https://github.com/mfitrie/Reddit_ShowerThoughts/tree/feature/ProjectScreenshot/secondpage.png
+[product-screenshot-1]: https://github.com/mfitrie/Reddit_ShowerThoughts/blob/feature/ProjectScreenshot/firstpage.png
+[product-screenshot-2]: https://github.com/mfitrie/Reddit_ShowerThoughts/blob/feature/ProjectScreenshot/secondpage.png
 [MongoDB-dev]: https://img.shields.io/badge/MongoDB-35495E?style=for-the-badge&logo=mongodb
 [MongoDB-url]: https://www.mongodb.com/
 [Express.js]: https://img.shields.io/badge/Express-35495E?style=for-the-badge&logo=express
