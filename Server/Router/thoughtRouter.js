@@ -110,7 +110,22 @@ router.get('/', async (req,res)=>{
 });
 
 router.get('/picture/:id', (req, res)=>{
-    res.status(200).sendFile(path.resolve(__dirname, `../../anime_curious/${req.params.id}.jpg`));
+    try {
+        const MAX_ID = 7;
+        const id = req.params.id;
+
+        if(id <= MAX_ID){
+            res.status(200).sendFile(path.resolve(__dirname, `../../anime_curious/${id}.jpg`));
+            return;
+        }
+
+        throw Error;
+        
+    } catch (error) {
+        res.status(404).json({
+            message: `There is no ID: ${req.params.id}`
+        });
+    }
 })
 
 router.get('/getall', async (req, res)=>{
