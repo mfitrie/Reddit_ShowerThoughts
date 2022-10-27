@@ -56,18 +56,18 @@ app.use(express.json());
 app.use('/api', thoughtRouter);
 
 
-app.get('/', (req,res)=>{
-    res.status(200).json({
-        data: 'No data for this route'
-    })
-});
-
-
-// // Send static file
-// app.use(express.static(path.resolve(__dirname, '../public')));
-// app.get('/', (req, res)=>{
-//     res.sendFile(path.resolve(`${__dirname}`, '../public/index.html'));
+// app.get('/', (req,res)=>{
+//     res.status(200).json({
+//         data: 'No data for this route'
+//     })
 // });
+
+
+// Send static file
+app.use(express.static(path.resolve(__dirname, '../public')));
+app.get('/', (req, res)=>{
+    res.sendFile(path.resolve(`${__dirname}`, '../public/index.html'));
+});
 
 
 

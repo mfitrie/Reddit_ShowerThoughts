@@ -33,7 +33,7 @@
         <div class="SectionTwo">
             <b-row class="SectionTwo__cardContainer">
                 <div v-for="item in thoughts" :key="item.index">
-                    <home-card :description="item.thought"></home-card>
+                    <home-card :image="item.image" :description="item.thought"></home-card>
                 </div>
             </b-row>
             <b-row class="SectionTwo__btnRefreshContainer">
@@ -78,8 +78,8 @@ export default {
         },
         async refreshData(){
             try {
-                const requestGet = await axios.get('/api/getThoughtRandom');
                 this.thoughts = [];
+                const requestGet = await axios.get('/api/getThoughtRandom');
                 this.thoughts.push(...requestGet.data.data);
             } catch (error) {
                 this.thoughts.push('No data');
@@ -103,6 +103,10 @@ export default {
 
     :root{
         --reddit-color: #FF4500;
+    }
+
+    html{
+        scroll-behavior: smooth;
     }
 
     *{

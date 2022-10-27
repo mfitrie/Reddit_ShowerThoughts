@@ -26,13 +26,15 @@ export default {
             type: String,
             default: 'No info'
         }
-    }
+    },
 }
 </script>
 
 <style lang="scss">
     .SectionTwo{
         &__cardContainer{
+            justify-content: center;
+            align-content: center;
 
             .SectionTwo__card{
                 height: 100%;
@@ -40,12 +42,19 @@ export default {
                 min-width: 16.5rem;
                 max-width: 16.5rem;
                 border-radius: 5px;
-                text-align: justify;
+                // text-align: justify;
+                background-color: #FF8355;
                 box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
                 img{
                     min-height: 8rem;
                     max-height: 10rem;
+                    object-fit: cover;
+                }
+
+                .card-text{
+                    font-size: 1.2rem;
+                    color: #fff;
                 }
             }
         }

@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs').promises;
+const path = require('path');
 
 const Thought = require('../../DB/model');
 
@@ -52,9 +54,10 @@ const countThoughtData = async()=>{
 }
 
 
-const getFiveRandomThought = async ()=>{
+const getFiveRandomThought = async (hostName)=>{
     try {
         const count = await countThoughtData();
+        const TOTAL_IMAGE = 7;
         const tenRandomNumber = [];
         const tenThought = [];
 
@@ -68,12 +71,23 @@ const getFiveRandomThought = async ()=>{
         })
 
         for(number of tenRandomNumber){
-            const data = await Thought.findOne({
+            const dataDB = await Thought.findOne({
                 index: number
             }, {
                 _id: 0,
                 __v: 0,
             }) ?? 'No Data'
+
+            const randomNumberImage = Math.floor(Math.random() * TOTAL_IMAGE) + 1;
+            const data = {
+                index: dataDB.index,
+                vote: dataDB.vote,
+                thought: dataDB.thought,
+                image: `http://${hostName}/picture/anime_curious/${randomNumberImage}.jpg`
+            }
+
+            // data.image = `${hostName}/picture/anime_curious/1.png`;
+            // data.image = 'hello';
 
             tenThought.push(data);
         }
@@ -101,10 +115,17 @@ router.get('/getall', async (req, res)=>{
 });
 
 router.get('/getThoughtRandom', async (req, res)=>{
-    const data = await getFiveRandomThought();
-    res.status(200).json({
-        data
-    });
+    try {
+        const data = await getFiveRandomThought(req.get('host'));
+        res.status(200).json({
+            data,
+        });
+        // res.status(200).send(`<img src=${data}>`)
+    } catch (error) {
+        res.status(404).json({
+            message: 'Error in server'
+        })
+    }
 });
 
 router.get('/getbyindex/:index', async(req, res)=>{
@@ -116,6 +137,7 @@ router.get('/getbyindex/:index', async(req, res)=>{
     });
 });
 
+// TESTING POST
 router.post('/addThought', (req, res)=>{
     res.status(200).json({
         data: 'Data added!'
