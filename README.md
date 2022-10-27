@@ -78,9 +78,10 @@ Use the `BLANK_README.md` to get started. -->
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+<!-- This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples. -->
 
 * [![MongoDB][MongoDB-dev]][MongoDB-url]
+* [![Node][Node.js]][Node.js-url]
 * [![Express][Express.js]][Express-url]
 * [![Vue][Vue.js]][Vue-url]
 * [![Sass][Sass-dev]][Sass-url]
@@ -110,6 +111,8 @@ This section should list any major frameworks/libraries used to bootstrap your p
 [product-screenshot-2]: https://github.com/mfitrie/Reddit_ShowerThoughts/blob/feature/ProjectScreenshot/secondpage.png
 [MongoDB-dev]: https://img.shields.io/badge/MongoDB-35495E?style=for-the-badge&logo=mongodb
 [MongoDB-url]: https://www.mongodb.com/
+[Node.js]: https://img.shields.io/badge/Node.Js-35495E?style=for-the-badge&logo=nodedotjs
+[Node.js-url]: https://nodejs.org/en/
 [Express.js]: https://img.shields.io/badge/Express-35495E?style=for-the-badge&logo=express
 [Express-url]: https://expressjs.com/
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
