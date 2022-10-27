@@ -83,7 +83,7 @@ const getFiveRandomThought = async (hostName)=>{
                 index: dataDB.index,
                 vote: dataDB.vote,
                 thought: dataDB.thought,
-                image: `http://${hostName}/picture/anime_curious/${randomNumberImage}.jpg`
+                image: `http://localhost:8000/api/picture/${randomNumberImage}`
             }
 
             // data.image = `${hostName}/picture/anime_curious/1.png`;
@@ -99,6 +99,8 @@ const getFiveRandomThought = async (hostName)=>{
     }
 }
 
+router.use(express.static(path.resolve(__dirname, '../../anime_curious')));
+
 
 router.get('/', async (req,res)=>{
     const count = await countThoughtData(); 
@@ -106,6 +108,10 @@ router.get('/', async (req,res)=>{
         message: `Welcome to ShowerThoughts API :D!! There are ${count} number of data.`,
     });
 });
+
+router.get('/picture/:id', (req, res)=>{
+    res.status(200).sendFile(path.resolve(__dirname, `../../anime_curious/${req.params.id}.jpg`));
+})
 
 router.get('/getall', async (req, res)=>{
     const data = await getAllDataThought();
