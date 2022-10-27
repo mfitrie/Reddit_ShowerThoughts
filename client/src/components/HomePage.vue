@@ -7,7 +7,7 @@
                     Reddit ShowerThoughts
                 </span>
                 <ul class="SectionOne__listMenu">
-                    <li>
+                    <li class="SectionOne__github">
                         <Icon icon="akar-icons:github-fill" class="SectionOne__githubIcon" />
                         <a href="https://github.com/mfitrie/Reddit_ShowerThoughts" target="__blank" class="SectionOne__linkGithub">
                             GitHub
@@ -22,7 +22,7 @@
                     </div>
                     <p class="SectionOne__mainDescription">A place A place where everyone's deepest must peculiar about humanity can be witnessed firsthand.</p>
                     <div class="SectionOne__btnContainer">
-                        <button class="SectionOne__btnStarted" title="Get Started">
+                        <button class="SectionOne__btnStarted" title="Get Started" @click="scrollThePage">
                             GET STARTED
                             <Icon icon="akar-icons:chevron-right" class="SectionOne__iconGetStarted"/>
                         </button>
@@ -30,7 +30,7 @@
                 </b-col>
             </b-row>
         </div> 
-        <div class="SectionTwo">
+        <div class="SectionTwo" id="SectionTwo">
             <b-row class="SectionTwo__cardContainer">
                 <div v-for="item in thoughts" :key="item.index">
                     <home-card :image="item.image" :description="item.thought"></home-card>
@@ -91,6 +91,11 @@ export default {
                 }
             }    
         },
+        scrollThePage(){
+            document.getElementById('SectionTwo').scrollIntoView({
+                behavior:'smooth'
+            });
+        }
     },
     async mounted() {
         await this.initData();
@@ -103,10 +108,6 @@ export default {
 
     :root{
         --reddit-color: #FF4500;
-    }
-
-    html{
-        scroll-behavior: smooth;
     }
 
     *{
@@ -155,9 +156,9 @@ export default {
                 margin-top: auto;
                 margin-bottom: auto;
 
-                li{
+                .SectionOne__github{
                     list-style: none;
-                    padding: 1rem;
+                    padding: 0.5rem 1rem 0.5rem 1rem;
                     cursor: pointer;
 
                     .SectionOne__linkGithub{
