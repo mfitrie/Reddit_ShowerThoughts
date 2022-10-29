@@ -54,7 +54,7 @@ const countThoughtData = async()=>{
 }
 
 
-const getFiveRandomThought = async (hostName)=>{
+const getFiveRandomThought = async (protocol, hostName)=>{
     try {
         const count = await countThoughtData();
         const TOTAL_IMAGE = 7;
@@ -83,7 +83,7 @@ const getFiveRandomThought = async (hostName)=>{
                 index: dataDB.index,
                 vote: dataDB.vote,
                 thought: dataDB.thought,
-                image: `http://localhost:8000/api/picture/${randomNumberImage}`
+                image: `${protocol}://${hostName}/api/picture/${randomNumberImage}`
             }
 
             // data.image = `${hostName}/picture/anime_curious/1.png`;
@@ -137,7 +137,7 @@ router.get('/getall', async (req, res)=>{
 
 router.get('/getThoughtRandom', async (req, res)=>{
     try {
-        const data = await getFiveRandomThought(req.get('host'));
+        const data = await getFiveRandomThought(req.protocol, req.get('host'));
         res.status(200).json({
             data,
         });
@@ -160,7 +160,10 @@ router.get('/getbyindex/:index', async(req, res)=>{
 
 // TESTING POST
 router.post('/addThought', (req, res)=>{
+    const username = req.body.username;
+
     res.status(200).json({
+        username,
         data: 'Data added!'
     });
 });

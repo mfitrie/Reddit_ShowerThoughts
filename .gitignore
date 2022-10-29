@@ -4,3 +4,4 @@
 config.env
 ShowerThoughtsData.json
 *.xd
+*.rest
